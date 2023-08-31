@@ -6,7 +6,8 @@ import CustomInput from '../components/CustomInput'
 import CustomButton from '../components/CustomButton'
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch } from 'react-redux'
-import { signupRequested } from '../mediaStore/authSlice'
+import { signupRequested } from '../mediaStore/apiRequest'
+
 
 
 export default function SignUp({ navigation }) {
@@ -39,7 +40,7 @@ export default function SignUp({ navigation }) {
 
     const handleSignIn = () => {
         const { email, password, name } = form;
-        dispatch(signupRequested({ email: email.value, password: password.value, name: name.value, imageUrl }));
+        dispatch(signupRequested({ email: email.value, password: password.value, name: name.value, imageUrl }));       
     }
 
     return (

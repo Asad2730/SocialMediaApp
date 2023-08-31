@@ -5,7 +5,8 @@ import { colors } from '../utils/colors'
 import CustomInput from '../components/CustomInput'
 import CustomButton from '../components/CustomButton'
 import { useDispatch } from 'react-redux'
-import { login } from '../mediaStore/authSlice'
+import { loginRequested } from '../mediaStore/apiRequest'
+
 
 export default function Login({ navigation }) {
 
@@ -19,7 +20,7 @@ export default function Login({ navigation }) {
 
     const handleLogin = () => {
         let obj = { email: form.email.value, password: form.password.value }
-        dispacth(login())
+        dispacth( loginRequested(obj))
     }
 
     return (
