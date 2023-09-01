@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Asad2730/SocialMediaApp/conn"
-	"github.com/Asad2730/SocialMediaApp/routes"
+	"github.com/Asad2730/SocialMediaApp/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +12,6 @@ func init() {
 
 func main() {
 	r := gin.Default()
-	routes.UserRoutes(r)
+	handlers.UserRoutes(r)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
