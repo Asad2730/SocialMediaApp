@@ -6,6 +6,6 @@ import (
 )
 
 func UserRoutes(r *gin.Engine) {
-	r.GET("login/:email/:password", services.GetUserByEmail_Password)
+	r.GET("login/:email/:password", services.GetUserByEmailAndPassword)
 	r.POST("signUp/", services.CreateUser)
 }
