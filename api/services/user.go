@@ -12,7 +12,13 @@ func CreateUser(c *gin.Context) {
 	if err != nil {
 		c.JSON(500, err.Error())
 	}
-	rs, err := repositories.CreateUser(user)
+
+	imageFile, err := c.FormFile("imageUrl")
+
+	if err != nil {
+		c.JSON(400, err.Error())
+	}
+	rs, err := repositories.CreateUser(user, imageFile)
 	if err != nil {
 		c.JSON(400, err.Error())
 	}
