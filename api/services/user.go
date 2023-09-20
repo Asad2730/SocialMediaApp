@@ -1,28 +1,40 @@
 package services
 
 import (
+	"fmt"
+
 	"github.com/Asad2730/SocialMediaApp/models"
 	"github.com/Asad2730/SocialMediaApp/repositories"
 	"github.com/gin-gonic/gin"
 )
 
 func CreateUser(c *gin.Context) {
+
 	var user models.User
-	err := c.ShouldBindJSON(&user)
-	if err != nil {
-		c.JSON(500, err.Error())
+	fmt.Println("Fuck U")
+	fmt.Println("C", c)
+	if err := c.ShouldBindJSON(&user).Error; err != nil {
+		c.JSON(400, gin.H{"error Binding": err})
+		return
 	}
 
-	imageFile, err := c.FormFile("imageUrl")
+	fmt.Println("Data", user)
 
-	if err != nil {
-		c.JSON(400, err.Error())
-	}
-	rs, err := repositories.CreateUser(user, imageFile)
-	if err != nil {
-		c.JSON(400, err.Error())
-	}
-	c.JSON(200, rs)
+	fmt.Println("Data2", &user)
+
+	// imageFile, err := c.FormFile("image")
+	// if err != nil {
+	// 	c.JSON(400, gin.H{"error uploading image": err.Error()})
+	// 	return
+	// }
+
+	// rs, err := repositories.CreateUser(&user, imageFile)
+	// if err != nil {
+	// 	c.JSON(500, gin.H{"error creating": err.Error()})
+	// 	return
+	// }
+
+	// c.JSON(201, rs)
 }
 
 func GetUserByEmailAndPassword(c *gin.Context) {

@@ -28,9 +28,9 @@ export const signupRequested = createAsyncThunk(
             data.append('name', name)
             data.append('email', email)
             data.append('password', password)
-            data.append('imageUrl', imageUrl)
+            data.append('image', imageUrl)
 
-            let response = await axios.post('My_Api_EndPoint', data, config)
+            let response = await axios.post('http://localhost:8080/signUp/', data, config)
             return response.data
         } catch (ex) {
             return thunkAPI.rejectWithValue(ex.message);
