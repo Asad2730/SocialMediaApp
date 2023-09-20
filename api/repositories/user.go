@@ -24,7 +24,7 @@ func CreateUser(user *models.User, imageFile *multipart.FileHeader) (*models.Use
 		}
 		defer uploadedImage.Close()
 
-		uid := user.Id
+		uid := user.ID
 		// Generate a unique filename for the image
 		imageFileName := fmt.Sprintf("user_%d_%s", uid, imageFile.Filename)
 
