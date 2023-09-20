@@ -11,13 +11,13 @@ func CreateUser(c *gin.Context) {
 	var user models.User
 
 	if err := c.ShouldBind(&user); err != nil {
-		c.JSON(400, gin.H{"error Binding": err})
+		c.JSON(401, gin.H{"error Binding": err})
 		return
 	}
 
 	imageFile, err := c.FormFile("image")
 	if err != nil {
-		c.JSON(400, gin.H{"error uploading image": err.Error()})
+		c.JSON(402, gin.H{"error uploading image": err.Error()})
 		return
 	}
 
