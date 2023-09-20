@@ -27,6 +27,13 @@ export const authSlice = createSlice({
             .addCase(signupRequested.fulfilled, (state, action) => {
                 const response = action.payload;
                 state.isLogin = true;
+                // // Create a new userAuth object
+                // state.userAuth = {  
+                //     email: response.email,
+                //     name: response.name,
+                //     password: response.password,
+                //     imageUrl: response.imageUrl,
+                // };
                 state.userAuth.email = response.email;
                 state.userAuth.name = response.name;
                 state.userAuth.password = response.password;

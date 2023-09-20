@@ -16,6 +16,7 @@ export default function SignUp({ navigation }) {
     const dispatch = useDispatch();
 
     const [imageUrl, setImage] = useState(null);
+  //  const [formImage,setFormImage] = useState();
 
     const [form, setForm] = useState({
         email: { value: '', placeholder: 'user email', type: 'email-address'},
@@ -34,13 +35,14 @@ export default function SignUp({ navigation }) {
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
+            // setFormImage(result.assets[0])
         }
     };
 
 
     const handleSignIn = () => {
         const { email, password, name } = form;
-        dispatch(signupRequested({ email: email.value, password: password.value, name: name.value, imageUrl }));       
+        dispatch(signupRequested({ email: email.value, password: password.value, name: name.value, formImage }));       
     }
 
     return (
