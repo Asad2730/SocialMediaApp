@@ -27,25 +27,19 @@ export const authSlice = createSlice({
             .addCase(signupRequested.fulfilled, (state, action) => {
                 const response = action.payload;
                 state.isLogin = true;
-                // // Create a new userAuth object
-                // state.userAuth = {  
-                //     email: response.email,
-                //     name: response.name,
-                //     password: response.password,
-                //     imageUrl: response.imageUrl,
-                // };
                 state.userAuth.email = response.email;
                 state.userAuth.name = response.name;
                 state.userAuth.password = response.password;
                 state.userAuth.imageUrl = response.imageUrl;
             })
-            .addCase(signupRequested.rejected, (state, action) => state.isError = action.error.message)
-            .addCase(loginRequested.fulfilled,(state,action) => {
+            .addCase(loginRequested.fulfilled, (state, action) => {
                 const response = action.payload;
                 state.isLogin = true;
                 //do additional actions here
             })
-            .addCase(loginRequested.rejected,(state,action)=>state.isError = action.error.message)
+
+            .addCase(signupRequested.rejected, (state, action) => state.isError = action.error.message)
+            .addCase(loginRequested.rejected, (state, action) => state.isError = action.error.message)
             .addDefaultCase((state, action) => { });
     },
 });
