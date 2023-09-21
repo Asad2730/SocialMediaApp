@@ -11,7 +11,8 @@ const config = {
 export const loginRequested = createAsyncThunk(
     'auth/loginRequested',
     async ({ email, password }, thunkAPI) => {
-        try {         
+        try {
+         
             let response = await axios.get(`${url}login/${email}/${password}`);      
             return response.data;
         } catch (ex) {       
