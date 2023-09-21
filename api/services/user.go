@@ -50,7 +50,19 @@ func GetUserByEmailAndPassword(c *gin.Context) {
 	c.JSON(200, rs)
 }
 
+func GetAllusers(c *gin.Context) {
+
+	var user []models.User
+	rs, err := repositories.GetAllusers(user)
+	if err != nil {
+		c.JSON(500, err.Error())
+		return
+	}
+	c.JSON(200, rs)
+}
+
 func GetImage(c *gin.Context) {
 	filename := c.Param("filename")
 	c.File("uploads/" + filename)
+
 }

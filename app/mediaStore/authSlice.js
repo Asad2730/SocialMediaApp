@@ -1,46 +1,60 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginRequested, signupRequested } from './apiRequest';
+import { loginRequested, signupRequested, getUsersRequested } from './apiRequest';
 
 const initialState = {
     isLogin: false,
     isError: null,
+    loading: true,
     userAuth: {
         email: '',
         password: '',
         name: '',
         imageUrl: '',
     },
+    users: [],
 };
-
-
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        logout: (state, action) => {
+        logout: (state) => {
             state.isLogin = false;
+            state.loading = true;
+            state.userAuth.email = '';
+            state.userAuth.name = '';
+            state.userAuth.password = '';
+            state.userAuth.imageUrl = '';
+            state.users = [];
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(signupRequested.fulfilled, (state, action) => {
-                const response = action.payload;
                 state.isLogin = true;
-                state.userAuth.email = response.email;
-                state.userAuth.name = response.name;
-                state.userAuth.password = response.password;
-                state.userAuth.imageUrl = response.imageUrl;
+                state.userAuth.email = action.payload.Email;
+                state.userAuth.name = action.payload.Name;
+                state.userAuth.password = action.payload.Password;
+                state.userAuth.imageUrl = action.payload.ImageUrl;
             })
             .addCase(loginRequested.fulfilled, (state, action) => {
-                const response = action.payload;
                 state.isLogin = true;
-                //do additional actions here
+                state.userAuth.email = action.payload.Email;
+                state.userAuth.name = action.payload.Name;
+                state.userAuth.password = action.payload.Password;
+                state.userAuth.imageUrl = action.payload.ImageUrl;
             })
-
-            .addCase(signupRequested.rejected, (state, action) => state.isError = action.error.message)
-            .addCase(loginRequested.rejected, (state, action) => state.isError = action.error.message)
-            .addDefaultCase((state, action) => { });
+            .addCase(getUsersRequested.fulfilled, (state, action) => {
+                state.loading = false;
+                state.users = action.payload;
+            })
+            .addMatcher(
+                (action) => [signupRequested, loginRequested, getUsersRequested].some(a => a.rejected.match(action)),
+                  (state, action) => {
+                    console.log('Error',action.error);     
+                    state.isError = action.error.message;
+                 }
+            )
     },
 });
 

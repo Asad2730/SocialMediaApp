@@ -29,7 +29,8 @@ func CreateUser(user *models.User, imageFile *multipart.FileHeader) (*models.Use
 		imageFileName := fmt.Sprintf("user_%d_%s", uid, imageFile.Filename)
 
 		// Specify the directory where you want to store the uploaded images
-		imagepath := filepath.Join("uploads/", imageFileName)
+		//imagepath := filepath.Join("uploads/", imageFileName)
+		imagepath := filepath.Join(imageFileName)
 
 		// Create a new file for storing the image
 		imageFile, err := os.Create(imagepath)
@@ -60,4 +61,12 @@ func GetUserByEmailAndPassword(email, password string, user models.User) (*model
 		return nil, err
 	}
 	return &user, nil
+}
+
+func GetAllusers(user []models.User) ([]models.User, error) {
+
+	if err := conn.Db.Find(&user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
 }
