@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login.dart';
-import 'package:flutter_app/utils/themes.dart';
+import 'package:flutter_app/screens/signin.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -13,9 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       home: const Login(),
+       home: const Signin(),
        key: Get.key,
-       color: myTheme.backgroundColor,
     );
 
   }
