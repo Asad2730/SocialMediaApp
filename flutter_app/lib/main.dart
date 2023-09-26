@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login.dart';
-import 'package:flutter_app/screens/signin.dart';
+import 'package:flutter_app/screens/signup.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -12,10 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-       home: const Signin(),
-       key: Get.key,
+    return  GetMaterialApp(
+       initialRoute: '/login',
+       getPages: [
+         GetPage(name: '/login', page: ()=> const Login()),
+         GetPage(name: '/signup', page: ()=> const SignUp())
+       ],
     );
-
   }
 }
